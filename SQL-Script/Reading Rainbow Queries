@@ -1,0 +1,97 @@
+SELECT * 
+FROM Book 
+INNER JOIN Wrote ON Book.BOOK_CODE = Wrote.BOOK_CODE
+ORDER BY PRICE DESC;
+
+SELECT W.BOOK_CODE, W.AUTHOR_NUM
+FROM Wrote AS W
+LEFT JOIN Author AS A ON W.AUTHOR_NUM = A.AUTHOR_NUM
+WHERE W.AUTHOR_NUM >= 21;
+
+SELECT Branch.BRANCH_NUM, Branch.BRANCH_NAME, Branch.BRANCH_LOCATION, Inventory.BOOK_CODE
+FROM Inventory
+RIGHT JOIN Branch ON Inventory.BRANCH_NUM = Branch.BRANCH_NUM
+ORDER BY Inventory.BOOK_CODE ASC;
+
+SELECT Book.BOOK_CODE, Book.TITLE, Book.BOOK_GENRE, Book.PRICE, Wrote.AUTHOR_NUM, Inventory.ON_HAND
+FROM Book
+INNER JOIN Wrote ON Book.BOOK_CODE = Wrote.BOOK_CODE
+INNER JOIN Inventory ON Book.BOOK_CODE = Inventory.BOOK_CODE;
+
+Select * From Branch
+Where NUM_EMPLOYEES > 8
+Union
+Select * From Branch_Expansion
+Where NUM_EMPLOYEES > 8;
+
+DROP TABLE Branch_Expansion;
+
+INSERT INTO Branch 
+VALUES (5, 'Books In Bay Village', '25619 Lake Road', 6),
+    (6, 'Books In Westlake', '1876 Crocker Drive', 9),
+    (7, 'Books In The CLE', '18521 E 185th Street', 14),
+    (8, 'Books In The Valley', '3885 Brittain Road', 8);
+
+Select * From Branch
+Order By NUM_EMPLOYEES Desc;
+
+Select EMPLOYEE_ID, BRANCH_NUM,
+    Case
+        When BRANCH_NUM = 1 Then 'Branch Downtown'
+        When BRANCH_NUM = 2 Then 'Branch On The Hill'
+        When BRANCH_NUM = 3 Then 'Branch On The Eastshore'
+        When BRANCH_NUM = 4 Then 'Branch In Brooklyn'
+        Else 'Not a valid Branch Number'
+    End As [Employee Job Location] From Branch_Employees;
+
+Select AUTHOR_NUM From Wrote
+Intersect
+Select AUTHOR_NUM From Author
+Where AUTHOR_NUM BETWEEN 11 AND 29;
+
+Select B1.BRANCH_NUM, B2.BRANCH_NUM As [Related Branch]
+From Branch B1
+Join Branch B2 On B1.BRANCH_NUM IN (2, 5);
+
+Select 
+    Branch.BRANCH_NUM, 
+    Branch.BRANCH_LOCATION, 
+    Branch_Employees.EMPLOYEE_ID, 
+    Branch_Employees.HOURLY_WAGE
+From Branch
+Cross Join Branch_Employees
+Where Branch.BRANCH_NUM = 4 And Branch_Employees.HOURLY_WAGE = 12.50;
+
+Select 
+    Branch_Employees.EMPLOYEE_ID,
+    Branch_Employees.LAST_NAME,
+    Branch_Employees.BRANCH_NUM,
+    Avg(Sales.SALE_PRICE) As [Average Sales Price]
+From Branch_Employees
+Left Join Sales
+    On Branch_Employees.BRANCH_NUM = Sales.BRANCH_NUM
+Group By 
+    Branch_Employees.BRANCH_NUM, 
+    Branch_Employees.EMPLOYEE_ID, 
+    Branch_Employees.LAST_NAME;
+
+Select EMPLOYEE_ID, JOB_CODE, Max(HOURLY_WAGE) As MaxHourlyWage
+From Branch_Employees
+Group By JOB_CODE, EMPLOYEE_ID
+Having Max(HOURLY_WAGE) = 0;
+
+
+Update Branch_Employees
+Set HOURLY_WAGE = 25.00
+Where HOURLY_WAGE = 0.00;
+
+Select Inventory.BRANCH_NUM AS BranchNumber, Branch_Employees.EMPLOYEE_ID AS EmployeeID, Branch_Employees.LAST_NAME AS LastName,
+Avg(Branch_Employees.HOURLY_WAGE) As AverageHourlyWage
+From Inventory
+Right Join Branch_Employees
+On Inventory.BRANCH_NUM = Branch_Employees.BRANCH_NUM
+Group By 
+    Inventory.BRANCH_NUM, 
+    Branch_Employees.EMPLOYEE_ID, 
+    Branch_Employees.LAST_NAME
+Having Avg(Branch_Employees.HOURLY_WAGE) > 20.00;
