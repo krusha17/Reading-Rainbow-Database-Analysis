@@ -1,0 +1,18 @@
+Title: Reading Rainbow Bookstore - Sales, Inventory, and Pricing Dashboard
+
+Summary:
+This interactive dashboard visualizes key metrics for the fictional Reading Rainbow Bookstore, providing actionable insights into sales trends, inventory management, and pricing strategies. Designed to simulate real-world retail analytics, this project demonstrates advanced data visualization techniques using Tableau.
+
+Features:
+Sales Trends by Date: Displays daily sales trends, enabling identification of peak sales days and pricing patterns.
+Average Book Price by Genre: Highlights average book prices for various genres, aiding in pricing strategy optimization.
+Inventory Levels by Branch: Shows branch-level inventory distribution, helping to identify overstock or understock situations.
+Top 5 Best-Selling Books: Visualizes the top revenue-generating books to guide restocking and promotional efforts.
+
+Tools Used:
+Tableau Public: For data visualization and interactive dashboard creation.
+Excel and SQL: For data cleaning, structuring, and preparation.
+
+Interactivity:
+Filters allow exploration by book genres and sales dates.
+Highlighting features help in cross-chart analysis for deeper insights.
