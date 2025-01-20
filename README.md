@@ -25,9 +25,10 @@ Visualizations`: Tableau dashboards and screenshots of results.
 
  **Tableau Dashboard**
 Explore the interactive dashboards for insights into:
-- Sales trends across branches.
-- Inventory levels by book and location.
-- Employee performance and wage distribution.
+Sales Trend by Date: Displays the daily sales price trends to identify peak sale periods and fluctuations.
+Average Book Price by Genre: Highlights the average pricing of books for different genres, offering insights into pricing strategy.
+Inventory Levels: Provides a breakdown of books on hand for each branch to optimize inventory management.
+Top 5 Sellers: Identifies the top-performing books based on sales revenue, helping to prioritize restocking and promotional efforts.
 
 **Business Insights:**
 Sales performance by branch and book genre.
